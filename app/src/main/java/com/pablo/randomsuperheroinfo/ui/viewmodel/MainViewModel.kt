@@ -6,10 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pablo.randomsuperheroinfo.domain.GetHeroByIdUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 //ViewModel para la pantalla principal de la aplicación
-class MainViewModel: ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val getHeroByIdUseCase: GetHeroByIdUseCase //Caso de uso para obtener un héroe por su ID utilizando Dagger Hilt
+) : ViewModel() {
 
     //LiveData para el estado de carga del héroe
     private val _onHeroLoaded = MutableLiveData<Boolean>()
@@ -42,9 +47,6 @@ class MainViewModel: ViewModel() {
 
     private val _combat = MutableLiveData<String>()
     val combat: LiveData<String> = _combat
-
-    //Caso de uso para obtener un héroe por su ID
-    var getHeroByIdUseCase = GetHeroByIdUseCase()
 
     //Función para obtener un héroe por su ID al inicializar el ViewModel
     init {

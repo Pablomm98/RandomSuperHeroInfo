@@ -4,24 +4,23 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.activity.viewModels
 import com.pablo.randomsuperheroinfo.ui.theme.RandomSuperHeroInfoTheme
 import com.pablo.randomsuperheroinfo.ui.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+//Clase principal de la actividad de la aplicación que utiliza Dagger Hilt para inyectar dependencias en la actividad
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             RandomSuperHeroInfoTheme {
-                MainScreen(MainViewModel())
+                MainScreen(mainViewModel)
             }
         }
     }

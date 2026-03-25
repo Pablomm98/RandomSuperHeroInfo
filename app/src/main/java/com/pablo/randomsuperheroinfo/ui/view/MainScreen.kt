@@ -1,5 +1,6 @@
 package com.pablo.randomsuperheroinfo.ui.view
 
+import androidx.activity.viewModels
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
@@ -29,6 +30,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pablo.randomsuperheroinfo.ui.viewmodel.MainViewModel
+import kotlin.getValue
 
 //Función principal
 @Composable
@@ -154,5 +156,7 @@ fun StatRow(label: String, progress: Float, color: Color) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun MainScreenPreview() {
-    MainScreen(MainViewModel())
+    MainScreen(MainViewModel(
+        getHeroByIdUseCase = TODO()
+    ))
 }
