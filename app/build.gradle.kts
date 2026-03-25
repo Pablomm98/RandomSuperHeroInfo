@@ -1,20 +1,19 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace = "com.pablo.randomsuperheroinfo"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.pablo.randomsuperheroinfo"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -39,6 +38,22 @@ android {
     }
 }
 
+// Migrating from deprecated kotlinOptions to compilerOptions
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+    }
+}
+
+// Suppress deprecation warnings for generated Hilt code
+tasks.withType<JavaCompile>().configureEach {
+    if (name.contains("hilt", ignoreCase = true)) {
+        options.compilerArgs.add("-Xlint:-deprecation")
+    } else {
+        options.compilerArgs.add("-Xlint:deprecation")
+    }
+}
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -49,13 +64,16 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
 
-    //Retrofit
+    // Dagger Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    // Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-    //Corrutinas
+    // Corrutinas
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.kotlin.coroutines.android)
-    //LiveData
+    // LiveData
     implementation(libs.androidx.compose.runtime.livedata)
 
     testImplementation(libs.junit)
