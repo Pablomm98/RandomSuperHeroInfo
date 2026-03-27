@@ -59,19 +59,17 @@ class MainViewModel @Inject constructor(
         _onHeroLoaded.value = false
         viewModelScope.launch {
             val result = getHeroByIdUseCase()
-            if(result != null) {
-                Log.d("API_CHECK", "Heroe recibido: $result")
-                _onHeroLoaded.value = true
-                _id.value = result.id
-                _name.value = result.name
-                _fullName.value = result.biography.fullName
-                _intelligence.value = result.powerstats.intelligence
-                _strength.value = result.powerstats.strength
-                _speed.value = result.powerstats.speed
-                _durability.value = result.powerstats.durability
-                _power.value = result.powerstats.power
-                _combat.value = result.powerstats.combat
-            }
+            Log.d("API_CHECK", "Heroe recibido: $result")
+            _onHeroLoaded.value = true
+            _id.value = result.id
+            _name.value = result.name
+            _fullName.value = result.biography.fullName
+            _intelligence.value = result.powerstats.intelligence
+            _strength.value = result.powerstats.strength
+            _speed.value = result.powerstats.speed
+            _durability.value = result.powerstats.durability
+            _power.value = result.powerstats.power
+            _combat.value = result.powerstats.combat
         }
     }
 }
