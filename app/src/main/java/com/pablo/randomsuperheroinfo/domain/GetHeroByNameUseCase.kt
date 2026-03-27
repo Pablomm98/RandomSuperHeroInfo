@@ -8,5 +8,5 @@ import javax.inject.Inject
 class GetHeroByNameUseCase @Inject constructor(private val repository: HeroRepository) {
 
     //Función para obtener un héroe por su nombre utilizando el repositorio de datos
-    suspend operator fun invoke(name: String): HeroModel = repository.getHeroByName(name)
+    suspend operator fun invoke(name: String): HeroModel = repository.getHeroByNameFromApi(name)
 }
