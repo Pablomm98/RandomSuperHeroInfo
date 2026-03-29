@@ -11,9 +11,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,25 +28,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pablo.randomsuperheroinfo.ui.viewmodel.MainViewModel
 
-//Función principal
+// Función principal que conecta con el ViewModel
 @Composable
 fun MainScreen(viewModel: MainViewModel) {
-    Box(
-        Modifier
-            .fillMaxSize()
-            .clickable { viewModel.getRandomHeroById() }) {
-        HeroInfoBox(modifier = Modifier.align(Alignment.Center), viewModel)
-    }
-}
-
-//Función que muestra la información del héroe
-@Composable
-fun HeroInfoBox(modifier: Modifier, viewModel: MainViewModel) {
-
-    //Obtenemos los valores de los LiveData del ViewModel y los convertimos en valores observables
+    val id: String by viewModel.id.observeAsState("")
     val onHeroLoaded: Boolean by viewModel.onHeroLoaded.observeAsState(false)
     val name: String by viewModel.name.observeAsState("")
     val fullName: String by viewModel.fullName.observeAsState("")
@@ -55,6 +46,84 @@ fun HeroInfoBox(modifier: Modifier, viewModel: MainViewModel) {
     val power: String by viewModel.power.observeAsState("0.0")
     val combat: String by viewModel.combat.observeAsState("0.0")
 
+    MainScreenContent(
+        onHeroLoaded = onHeroLoaded,
+        name = name,
+        fullName = fullName,
+        intelligence = intelligence,
+        strength = strength,
+        speed = speed,
+        durability = durability,
+        power = power,
+        combat = combat,
+        onRandomHeroClick = { viewModel.getRandomHeroById() },
+        onDetailClick = {
+            // Aquí iría la lógica de navegación, por ejemplo:
+            // navController.navigate("detail/$id")
+        }
+    )
+}
+
+// Función que contiene la UI (sin estado) para facilitar el Preview y las pruebas
+@Composable
+fun MainScreenContent(
+    onHeroLoaded: Boolean,
+    name: String,
+    fullName: String,
+    intelligence: String,
+    strength: String,
+    speed: String,
+    durability: String,
+    power: String,
+    combat: String,
+    onRandomHeroClick: () -> Unit,
+    onDetailClick: () -> Unit
+) {
+    Box(
+        Modifier
+            .fillMaxSize()
+            .clickable { onRandomHeroClick() }) {
+        Column(
+            modifier = Modifier.align(Alignment.Center),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            HeroInfoBox(
+                modifier = Modifier,
+                onHeroLoaded = onHeroLoaded,
+                name = name,
+                fullName = fullName,
+                intelligence = intelligence,
+                strength = strength,
+                speed = speed,
+                durability = durability,
+                power = power,
+                combat = combat
+            )
+
+            if (onHeroLoaded) {
+                Spacer(modifier = Modifier.height(24.dp))
+                Button(onClick = onDetailClick) {
+                    Text(text = "Ficha Completa")
+                }
+            }
+        }
+    }
+}
+
+// Función que muestra la información del héroe
+@Composable
+fun HeroInfoBox(
+    modifier: Modifier,
+    onHeroLoaded: Boolean,
+    name: String,
+    fullName: String,
+    intelligence: String,
+    strength: String,
+    speed: String,
+    durability: String,
+    power: String,
+    combat: String
+) {
     if (!onHeroLoaded) {
         CircularProgressIndicator(modifier = modifier)
     } else {
@@ -84,13 +153,13 @@ fun HeroInfoBox(modifier: Modifier, viewModel: MainViewModel) {
     }
 }
 
-//Función que muestra el texto con los valores elegidos
+// Función que muestra el texto con los valores elegidos
 @Composable
 fun MyText(text: String, color: Color, style: TextStyle) {
     Text(text, color = color, style = style)
 }
 
-//Función que muestra las estadísticas del héroe en forma de barras
+// Función que muestra las estadísticas del héroe en forma de barras
 @Composable
 fun PowerStats(
     modifier: Modifier = Modifier,
@@ -111,18 +180,15 @@ fun PowerStats(
     }
 }
 
-//Función que muestra una fila de estadísticas con su respectiva barra
+// Función que muestra una fila de estadísticas con su respectiva barra
 @Composable
 fun StatRow(label: String, progress: Float, color: Color) {
-    // Variable de estado local para iniciar el progreso desde 0 y disparar la animación
     var currentProgress by remember { mutableFloatStateOf(0f) }
 
-    // Cada vez que el valor 'progress' cambie (nuevo héroe), reiniciamos y animamos
     LaunchedEffect(progress) {
         currentProgress = progress
     }
 
-    // Animación para el progreso de la barra
     val animatedProgress by animateFloatAsState(
         targetValue = currentProgress,
         animationSpec = tween(durationMillis = 1000),
@@ -147,5 +213,28 @@ fun StatRow(label: String, progress: Float, color: Color) {
             color = color,
             trackColor = color.copy(alpha = 0.2f)
         )
+    }
+}
+
+// Función de vista previa
+@Preview(showBackground = true)
+@Composable
+fun MainScreenPreview() {
+    MaterialTheme {
+        Surface {
+            MainScreenContent(
+                onHeroLoaded = true,
+                name = "Batman",
+                fullName = "Bruce Wayne",
+                intelligence = "100",
+                strength = "26",
+                speed = "27",
+                durability = "50",
+                power = "47",
+                combat = "100",
+                onRandomHeroClick = {},
+                onDetailClick = {}
+            )
+        }
     }
 }
