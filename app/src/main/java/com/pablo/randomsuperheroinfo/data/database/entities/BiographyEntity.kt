@@ -1,6 +1,7 @@
 package com.pablo.randomsuperheroinfo.data.database.entities
 
 import androidx.room.ColumnInfo
+import com.pablo.randomsuperheroinfo.domain.model.Biography
 
 data class BiographyEntity(
     @ColumnInfo(name = "full_name") val fullName: String,
@@ -11,3 +12,5 @@ data class BiographyEntity(
     @ColumnInfo(name = "publisher") val publisher: String,
     @ColumnInfo(name = "alignment") val alignment: String
 )
+
+fun Biography.toDatabase() = BiographyEntity(fullName, alterEgos, aliases, placeOfBirth, firstAppearance, publisher, alignment)
