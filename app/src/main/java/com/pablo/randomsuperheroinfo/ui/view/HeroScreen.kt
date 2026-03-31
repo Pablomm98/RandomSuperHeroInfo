@@ -45,6 +45,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import coil.request.ImageRequest
+import com.pablo.randomsuperheroinfo.R
 
 // Función que muestra la ficha del héroe
 @Composable
@@ -62,13 +66,17 @@ fun HeroScreen(hero: Hero, navigateBack: () -> Unit) {
         ) {
             // Imagen del Héroe
             AsyncImage(
-                model = hero.image.url,
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(hero.image.url.trim())
+                    .build(),
                 contentDescription = hero.name,
                 modifier = Modifier
                     .size(200.dp)
                     .clip(CircleShape)
                     .background(Color.LightGray),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                placeholder = painterResource(R.drawable.logo_solo),
+                error = painterResource(R.drawable.logo_solo_rojo)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
