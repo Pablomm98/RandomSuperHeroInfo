@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             RandomSuperHeroInfoTheme {
-                MainScreen(mainViewModel)
+                Navigation3Wrapper(mainViewModel)
             }
         }
     }

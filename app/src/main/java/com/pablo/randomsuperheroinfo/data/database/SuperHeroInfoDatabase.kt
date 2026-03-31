@@ -6,11 +6,12 @@ import androidx.room.TypeConverters
 import com.pablo.randomsuperheroinfo.data.database.dao.HeroDao
 import com.pablo.randomsuperheroinfo.data.database.entities.HeroEntity
 
+//Clase abstracta que representa la base de datos de la aplicación utilizando Room
 @Database(
     entities = [
         HeroEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

@@ -1,6 +1,7 @@
 package com.pablo.randomsuperheroinfo.data.database.entities
 
 import androidx.room.ColumnInfo
+import com.pablo.randomsuperheroinfo.domain.model.Appearance
 
 data class AppearanceEntity(
     @ColumnInfo(name = "gender") val gender: String,
@@ -10,3 +11,5 @@ data class AppearanceEntity(
     @ColumnInfo(name = "eye_color") val eyeColor: String,
     @ColumnInfo(name = "hair_color") val hairColor: String
 )
+
+fun Appearance.toDatabase() = AppearanceEntity(gender, race, height, weight, eyeColor, hairColor)

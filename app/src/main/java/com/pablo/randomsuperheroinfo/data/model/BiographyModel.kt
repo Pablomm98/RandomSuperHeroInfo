@@ -1,6 +1,7 @@
 package com.pablo.randomsuperheroinfo.data.model
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
 data class BiographyModel(
     @SerializedName("full-name") val fullName: String,

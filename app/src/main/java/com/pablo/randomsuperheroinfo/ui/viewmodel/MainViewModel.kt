@@ -5,7 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pablo.randomsuperheroinfo.data.model.HeroModel
 import com.pablo.randomsuperheroinfo.domain.GetHeroByIdUseCase
+import com.pablo.randomsuperheroinfo.domain.model.Hero
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -48,6 +50,10 @@ class MainViewModel @Inject constructor(
     private val _combat = MutableLiveData<String>()
     val combat: LiveData<String> = _combat
 
+    //LiveData para el héroe seleccionado
+    private val _selectedHero = MutableLiveData<Hero>()
+    val selectedHero: LiveData<Hero> = _selectedHero
+
     //Función para obtener un héroe por su ID al inicializar el ViewModel
     init {
         getRandomHeroById()
@@ -70,6 +76,7 @@ class MainViewModel @Inject constructor(
             _durability.value = result.powerstats.durability
             _power.value = result.powerstats.power
             _combat.value = result.powerstats.combat
+            _selectedHero.value = result
         }
     }
 }

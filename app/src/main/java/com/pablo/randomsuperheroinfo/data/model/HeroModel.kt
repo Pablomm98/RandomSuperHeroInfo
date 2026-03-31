@@ -1,6 +1,7 @@
 package com.pablo.randomsuperheroinfo.data.model
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
 //Modelo de datos para el héroe de la API
 data class HeroModel(
