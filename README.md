@@ -98,8 +98,3 @@ implementation(libs.androidx.compose.material.icons.extended)
 
 - [Pablo Martín](https://www.github.com/Pablomm98)
 - [LinkedIn](https://www.linkedin.com/in/pablo-martín-maría)
-
-
-## Importante a tener en cuenta para correcto funcionamiento
-## Importante a tener en cuenta para correcto funcionamiento
-## Importante a tener en cuenta para correcto funcionamiento
