@@ -21,50 +21,39 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pablo.randomsuperheroinfo.data.model.HeroModel
 import com.pablo.randomsuperheroinfo.domain.model.Hero
 import com.pablo.randomsuperheroinfo.ui.viewmodel.MainViewModel
 
 // Función principal que conecta con el ViewModel
 @Composable
 fun MainScreen(viewModel: MainViewModel, navigateToHero: (Hero) -> Unit) {
-    val id: String by viewModel.id.observeAsState("")
-    val onHeroLoaded: Boolean by viewModel.onHeroLoaded.observeAsState(false)
-    val name: String by viewModel.name.observeAsState("")
-    val fullName: String by viewModel.fullName.observeAsState("")
-    val intelligence: String by viewModel.intelligence.observeAsState("0.0")
-    val strength: String by viewModel.strength.observeAsState("0.0")
-    val speed: String by viewModel.speed.observeAsState("0.0")
-    val durability: String by viewModel.durability.observeAsState("0.0")
-    val power: String by viewModel.power.observeAsState("0.0")
-    val combat: String by viewModel.combat.observeAsState("0.0")
-    val selectedHero: Hero? by viewModel.selectedHero.observeAsState(null)
+    // Recoge el estado del ViewModel y lo convierte en un valor reactivo
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     MainScreenContent(
-        onHeroLoaded = onHeroLoaded,
-        name = name,
-        fullName = fullName,
-        intelligence = intelligence,
-        strength = strength,
-        speed = speed,
-        durability = durability,
-        power = power,
-        combat = combat,
+        onHeroLoaded = !uiState.isLoading && uiState.hero != null,
+        name = uiState.hero?.name ?: "",
+        fullName = uiState.hero?.biography?.fullName ?: "",
+        intelligence = uiState.hero?.powerstats?.intelligence ?: "0",
+        strength = uiState.hero?.powerstats?.strength ?: "0",
+        speed = uiState.hero?.powerstats?.speed ?: "0",
+        durability = uiState.hero?.powerstats?.durability ?: "0",
+        power = uiState.hero?.powerstats?.power ?: "0",
+        combat = uiState.hero?.powerstats?.combat ?: "0",
         onRandomHeroClick = { viewModel.getRandomHeroById() },
         onDetailClick = {
             // Navegación a la ficha del héroe
-            selectedHero?.let { hero ->
+            uiState.hero?.let { hero ->
                 navigateToHero(hero)
             }
         }

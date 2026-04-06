@@ -5,15 +5,16 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.pablo.randomsuperheroinfo.data.database.entities.HeroEntity
+import kotlinx.coroutines.flow.Flow
 
 //Interfaz para acceder a la base de datos utilizando Room y una corrutina en un hilo secundario
 @Dao
 interface HeroDao {
     @Query("SELECT * FROM hero_table ORDER BY id ASC")
-    suspend fun getAllHeroes(): List<HeroEntity>
+    fun getAllHeroes(): Flow<List<HeroEntity>>
 
     @Query("SELECT * FROM hero_table WHERE id = :id")
-    suspend fun getHeroById(id: String): HeroEntity
+    fun getHeroById(id: String): Flow<HeroEntity>
 
     @Query("DELETE FROM hero_table")
     suspend fun deleteAllHeroes()
