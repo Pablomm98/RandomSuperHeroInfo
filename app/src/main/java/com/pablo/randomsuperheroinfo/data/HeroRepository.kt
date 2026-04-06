@@ -6,6 +6,8 @@ import com.pablo.randomsuperheroinfo.data.model.HeroModel
 import com.pablo.randomsuperheroinfo.data.network.HeroService
 import com.pablo.randomsuperheroinfo.domain.model.Hero
 import com.pablo.randomsuperheroinfo.domain.model.toDomain
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 //Clase para obtener un héroe por su ID o por su nombre de la API utilizando Retrofit y una corrutina en un hilo secundario
@@ -17,11 +19,9 @@ class HeroRepository @Inject constructor(private val api: HeroService, private v
         return response.map { it.toDomain() }
     }
 
-    suspend fun getHeroByIdFromDatabase(id: String): List<Hero> {
+    fun getHeroByIdFromDatabase(id: String): Flow<Hero> {
         //Se obtiene el héroe por su ID utilizando el DAO de la base de datos y se guarda en el proveedor de datos en memoria
-        val response: List<HeroEntity> = listOf<HeroEntity>(heroDao.getHeroById(id))
-        //Se guarda el héroe en el proveedor de datos en memoria
-        return response.map { it.toDomain() }
+        return heroDao.getHeroById(id).map { it.toDomain() }
     }
 
     suspend fun insertHeroToDatabase(heroEntity: HeroEntity) {

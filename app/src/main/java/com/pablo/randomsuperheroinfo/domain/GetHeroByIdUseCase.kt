@@ -3,6 +3,7 @@ package com.pablo.randomsuperheroinfo.domain
 import com.pablo.randomsuperheroinfo.data.HeroRepository
 import com.pablo.randomsuperheroinfo.data.database.entities.toDatabase
 import com.pablo.randomsuperheroinfo.domain.model.Hero
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 //Caso de uso para obtener un héroe por su ID
