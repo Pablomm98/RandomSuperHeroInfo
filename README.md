@@ -1,12 +1,7 @@
-
 # Random SuperHero Info
 
 App ejemplo programada en Kotlin con Jetpack Compose aplicando Clean Architecture, arquitectura MVVM, librerías como Retrofit 2 para conexión con una API de datos, Navigation 3 para la navegación entre pantallas en la App, Dagger Hilt para la inyección de dependencias, Room para la persistencia de datos en local, corrutinas para tener un flujo de trabajo en distintos hilos, CI/CD con GitHub Actions para integración contínua y test unitarios para testear el código del proyecto.
 Es un ejemplo de la base para un desarrollo consistente, escalable y testeable.
-
-
-
-
 
 ## Estructura de las ramas del repositorio
 - [Master](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/master) - Rama por defecto que engloba todos los cambios realizados. Está todo el código del proyecto. 
@@ -15,6 +10,45 @@ Es un ejemplo de la base para un desarrollo consistente, escalable y testeable.
 - [CI/CD](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/ci/cd) - Versión del proyecto en la que se añade la integración contínia con GitHub Actions.
 - [Room](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/room) - Versión del proyecto en la que se añade la librería de Room para la persistencia de datos en local. Creación y configuración de la base de datos local.
 - [Navigation3](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/navigation3) - Versión del proyecto en la que se añade la librería Navigation3 para la navegación entre pantallas de la APP. Además de una nueva pantalla con los datos del héroe.
+- [Flows](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/flows) - Versión del proyecto en la que se añade Kotlin Flow para la obtención de datos de la base de datos y representarlos en la vista.
+Modificación del viewmodel cambiando los livedata por stateflow.
+Adaptación de la vista principal al stateflow
+
+## Capturas de la App
+<table style="width: 100%;">
+  <tr>
+    <td style="width: 33%; text-align: center;">
+      <img src="https://i.imgur.com/70SIIG9.jpeg" alt="Captura 1" width="100%">
+      <br><em>Pantalla principal Light</em>
+    </td>
+    <td style="width: 33%; text-align: center;">
+      <img src="https://i.imgur.com/IxVHcwt.jpeg" alt="Captura 2" width="100%">
+      <br><em>Ficha superheroe Light</em>
+    </td>
+    <td style="width: 33%; text-align: center;">
+      <img src="https://i.imgur.com/8JE7F1p.jpeg" alt="Captura 3" width="100%">
+      <br><em>Ficha superheroe Light</em>
+    </td>
+  </tr>
+</table>
+
+<table style="width: 100%;">
+  <tr>
+    <td style="width: 33%; text-align: center;">
+      <img src="https://i.imgur.com/CLXmyFF.jpeg" alt="Captura 1" width="100%">
+      <br><em>Pantalla principal Dark</em>
+    </td>
+    <td style="width: 33%; text-align: center;">
+      <img src="https://i.imgur.com/x7DXHZU.jpeg" alt="Captura 2" width="100%">
+      <br><em>Ficha superheroe Dark</em>
+    </td>
+    <td style="width: 33%; text-align: center;">
+      <img src="https://i.imgur.com/29gv8Sk.jpeg" alt="Captura 3" width="100%">
+      <br><em>Ficha superheroe Dark</em>
+    </td>
+  </tr>
+</table>
+
 ## Importante a tener en cuenta para correcto funcionamiento
 Es necesario añadir algunas librerías en el archivo libs.versions.toml para la implementación de todas las funcionalidades de la App.
 ```gradle
@@ -56,16 +90,13 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization"}
 ```
-
 En el gradle del módulo APP es necesario añadir los plugins de hilt, ksp y kotlin.serialization
-
 ```gradle
 alias(libs.plugins.hilt)
 alias(libs.plugins.ksp)
 alias(libs.plugins.jetbrains.kotlin.serialization)
 ```
 Y las dependencias correspondientes para todas las librerías y plugins que se han añadido
-
 ```gradle
 // Dagger Hilt
 implementation(libs.hilt.android)
@@ -95,6 +126,5 @@ implementation(libs.androidx.compose.material.icons.extended)
 ```
 
 ## Autor
-
 - [Pablo Martín](https://www.github.com/Pablomm98)
 - [LinkedIn](https://www.linkedin.com/in/pablo-martín-maría)
