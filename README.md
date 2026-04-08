@@ -71,6 +71,8 @@ androidx-material3-adaptive-navigation3 = { group = "androidx.compose.material3.
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
+kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+androidx-arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "archCoreTesting" }
 ```
 Y sus correspondientes versiones (son las últimas versiones disponibles en el momento de creación de la app)
 ```gradle
@@ -82,11 +84,13 @@ ksp = "2.1.0-1.0.29"
 room = "2.8.4"
 nav3Core = "1.0.1"
 lifecycleViewmodelNav3 = "2.11.0-alpha03"
-kotlinSerialization = "2.2.21"
+kotlinSerialization = "2.3.20"
 kotlinxSerializationCore = "1.9.0"
 material3AdaptiveNav3 = "1.3.0-alpha09"
 coil = "2.7.0"
-mockk = "1.13.13"
+mockk = "1.14.9"
+junitJupiter = "6.0.3"
+archCoreTesting = "2.2.0"
 ```
 Además de varios plugins como Hilt, KSP y la serialización de kotlin
 ```gradle
@@ -111,6 +115,7 @@ implementation(libs.converter.gson)
 // Corrutinas
 implementation(libs.kotlin.coroutines.core)
 implementation(libs.kotlin.coroutines.android)
+testImplementation(libs.kotlin.coroutines.test)
 // LiveData
 implementation(libs.androidx.compose.runtime.livedata)
 // Room
@@ -130,6 +135,10 @@ implementation(libs.androidx.compose.material.icons.extended)
 //Mockk
 testImplementation(libs.mockk)
 androidTestImplementation(libs.mockk.android)
+//JUnit
+testImplementation(libs.junit.jupiter)
+//Testing
+testImplementation(libs.androidx.arch.core.testing)
 ```
 
 ## Autor

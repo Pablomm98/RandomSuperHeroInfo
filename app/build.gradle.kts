@@ -74,6 +74,7 @@ dependencies {
     // Corrutinas
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.kotlin.coroutines.android)
+    testImplementation(libs.kotlin.coroutines.test)
     // LiveData
     implementation(libs.androidx.compose.runtime.livedata)
     // Room
@@ -93,6 +94,10 @@ dependencies {
     //Mockk
     testImplementation(libs.mockk)
     androidTestImplementation(libs.mockk.android)
+    //JUnit
+    testImplementation(libs.junit.jupiter)
+    //Testing
+    testImplementation(libs.androidx.arch.core.testing)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
