@@ -6,12 +6,14 @@ import org.junit.Before
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.verify
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
+@Suppress("UNUSED_EXPRESSION")
 //Clase de prueba para el caso de uso de obtener un héroe por su ID
 class GetHeroByIdUseCaseTest {
 
@@ -39,7 +41,7 @@ class GetHeroByIdUseCaseTest {
         getHeroByIdUseCase()
 
         //Then
-        coVerify(exactly = 1) { heroRepository.getHeroByIdFromDatabase(any()) }
+        verify(exactly = 1) { heroRepository.getHeroByIdFromDatabase(any()) }
     }
 
     //Función de prueba para obtener un héroe por su ID cuando la API devuelve una lista con un héroe
@@ -55,7 +57,7 @@ class GetHeroByIdUseCaseTest {
         //Then
         coVerify(exactly = 1) { heroRepository.clearHeroDatabase() }
         coVerify(exactly = 1) { heroRepository.insertHerosToDatabase(any()) }
-        coVerify(exactly = 0) { heroRepository.getHeroByIdFromDatabase(any()) }
+        verify(exactly = 0) { heroRepository.getHeroByIdFromDatabase(any()) }
         assert(response == hero)
     }
 }
