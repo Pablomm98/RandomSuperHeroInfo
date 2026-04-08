@@ -13,6 +13,7 @@ Es un ejemplo de la base para un desarrollo consistente, escalable y testeable.
 - [Flows](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/flows) - Versión del proyecto en la que se añade Kotlin Flow para la obtención de datos de la base de datos y representarlos en la vista.
 Modificación del viewmodel cambiando los livedata por stateflow.
 Adaptación de la vista principal al stateflow
+- [UnitTests](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/unitTests) - Versión del proyecto en la que se añade la librería de Mockk para la creación de tests unitarios.
 
 ## Capturas de la App
 <table style="width: 100%;">
@@ -68,6 +69,8 @@ androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecy
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationCore" }
 androidx-material3-adaptive-navigation3 = { group = "androidx.compose.material3.adaptive", name = "adaptive-navigation3", version.ref = "material3AdaptiveNav3" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
 ```
 Y sus correspondientes versiones (son las últimas versiones disponibles en el momento de creación de la app)
 ```gradle
@@ -83,6 +86,7 @@ kotlinSerialization = "2.2.21"
 kotlinxSerializationCore = "1.9.0"
 material3AdaptiveNav3 = "1.3.0-alpha09"
 coil = "2.7.0"
+mockk = "1.13.13"
 ```
 Además de varios plugins como Hilt, KSP y la serialización de kotlin
 ```gradle
@@ -123,6 +127,9 @@ implementation(libs.kotlinx.serialization.core)
 implementation(libs.coil.compose)
 //Icons Extended
 implementation(libs.androidx.compose.material.icons.extended)
+//Mockk
+testImplementation(libs.mockk)
+androidTestImplementation(libs.mockk.android)
 ```
 
 ## Autor
