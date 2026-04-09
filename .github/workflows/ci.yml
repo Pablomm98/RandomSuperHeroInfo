@@ -2,9 +2,9 @@ name: Android CI
 
 on:
   push:
-    branches: [ "ci/cd", "room", "navigation3", "flows", "unitTests", "master" ]
+    branches: [ "ci/cd", "room", "navigation3", "flows", "unitTests", "ciTesting", "master" ]
   pull_request:
-    branches: [ "ci/cd", "room", "navigation3", "flows", "unitTests", "master" ]
+    branches: [ "ci/cd", "room", "navigation3", "flows", "unitTests", "ciTesting", "master" ]
 
 jobs:
   build:
@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - name: Setup JDK 11
+      - name: Setup JDK 25
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
