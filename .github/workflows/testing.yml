@@ -1,6 +1,6 @@
 name: Android Testing CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   test:
