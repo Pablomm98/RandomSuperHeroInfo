@@ -6,14 +6,13 @@ Es un ejemplo de la base para un desarrollo consistente, escalable y testeable.
 ## Estructura de las ramas del repositorio
 - [Master](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/master) - Rama por defecto que engloba todos los cambios realizados. Está todo el código del proyecto. 
 - [Retrofit](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/retrofit) - Versión del proyecto en la que se añade la librería Retrofit 2 para la conexión con la API y creación de la capa de dominio y funcionalidades básicas de la APP.
-- [Dagger Hilt](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/daggerHilt) - Versión del proyecto en la que se añade la librería de Dagger Hilt y añadido la inyencción de dependencias en toda la App.
-- [CI/CD](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/ci/cd) - Versión del proyecto en la que se añade la integración contínia con GitHub Actions.
+- [Dagger Hilt](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/daggerHilt) - Versión del proyecto en la que se añade la librería de Dagger Hilt y añadido la inyección de dependencias en toda la App.
+- [CI/CD](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/ci/cd) - Versión del proyecto en la que se añade la integración contínua con GitHub Actions creando el workflow de CI/CD.
 - [Room](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/room) - Versión del proyecto en la que se añade la librería de Room para la persistencia de datos en local. Creación y configuración de la base de datos local.
 - [Navigation3](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/navigation3) - Versión del proyecto en la que se añade la librería Navigation3 para la navegación entre pantallas de la APP. Además de una nueva pantalla con los datos del héroe.
-- [Flows](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/flows) - Versión del proyecto en la que se añade Kotlin Flow para la obtención de datos de la base de datos y representarlos en la vista.
-Modificación del viewmodel cambiando los livedata por stateflow.
-Adaptación de la vista principal al stateflow
+- [Flows](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/flows) - Versión del proyecto en la que se añade Kotlin Flow para la obtención de datos de la base de datos y representarlos en la vista. Modificación del viewmodel cambiando los livedata por stateflow. Adaptación de la vista principal al stateflow
 - [UnitTests](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/unitTests) - Versión del proyecto en la que se añade la librería de Mockk para la creación de tests unitarios.
+- [CiTesting](https://github.com/Pablomm98/RandomSuperHeroInfo/tree/unitTests) - Versión del proyecto en la que se añade un nuevo workflow para la comprobación de los tests unitarios al subir al repositorio de GitHub.
 
 ## Capturas de la App
 <table style="width: 100%;">
